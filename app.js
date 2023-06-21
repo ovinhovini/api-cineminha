@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const cors = require ('cors')
+const cors = require('cors');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -11,4 +11,5 @@ app.get('/', (req, res) => {
     res.send('u fond us')
 });
 
-mudule.exports = app;
+
+module.exports = app;

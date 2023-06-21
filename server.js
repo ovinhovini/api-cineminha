@@ -1,6 +1,6 @@
-const http = require("https");
+const http = require("http");
 const app = require("./app");
-const port = process.env.PORT || 3002;
-const server = http = http.createServer(app);
+const port = process.env.PORT || 3004;
+const server = http.createServer(app);
 
 server.listen(port);
