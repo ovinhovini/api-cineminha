@@ -22,6 +22,37 @@ const tabelaFilme = [
     { id: 1, email: "email1@gmail.com", senha: "senha" },
   ];
 
+function comprarFilme(filmeId, usuarioId) {
+    if (tabelaFilme[filmeId].status === "Disponível") {
+        if (tabelaFilme[filmeId].ticket > 0) {
+          tabelaFilme[filmeId].ticket--;
+          const token = gerarToken();
+          enviarTokenParaUsuario(token, tabelaUsuario[usuarioId].email);
+        } else {
+          console.log("Não há tickets disponíveis para esse filme.");
+        }
+    } else {
+      console.log("Filme não está disponível para compra.");
+    }
+  }
+
+function gerarToken() {
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const comprimentoToken = 10;
+    let token = '';
+  
+    for (let i = 0; i < comprimentoToken; i++) {
+      const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+      token += caracteres.charAt(indiceAleatorio);
+    }
+  
+    return token;
+  }
+  
+  function enviarTokenParaUsuario(token, email) {
+    console.log(`Token ${token} enviado para o email ${email}.`);
+  }
+  
 app.get('/', (req, res, next) => {
     res.send('u fond us')
 });
@@ -37,7 +68,7 @@ app.post("/filme/add", (req, res, next) => {
       ticket: ticket,
       status: status,
     });
-    
+
     console.log(`Tamanho do array: ${tabelaFilme.length}`);
     res.send("Filme Adicionado com sucesso");
   });
