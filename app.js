@@ -26,7 +26,6 @@ function comprarFilme(filmeId, usuarioId) {
     if (tabelaFilme[filmeId].status === "Disponível") {
         if (tabelaFilme[filmeId].ticket > 0) {
           tabelaFilme[filmeId].ticket--;
-          const token = gerarToken();
           enviarTokenParaUsuario(token, tabelaUsuario[usuarioId].email);
         } else {
           console.log("Não há tickets disponíveis para esse filme.");
